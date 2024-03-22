@@ -8,18 +8,21 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <!-- Form for making action -->
        <h:form>
     <h:panelGrid columns="2">
         <h:outputLabel for="client" value="Select Client:" />
         <p:inputText value="#{action.idClientMode}" id="client" />
 
         <h:outputLabel for="product" value="Select Product:" />
-        <p:inputText value="#{action.idProductMode}" id="product" />
+        <h:selectOneMenu id="product" value="#{action.idProductMode}">
+            <f:selectItem itemLabel="Select Product" itemValue="" />
+            <f:selectItems value="#{product.allProducts}" var="prod" itemLabel="#{prod.name}" itemValue="#{prod.id}" />
+        </h:selectOneMenu>
     </h:panelGrid>
 
     <p:commandButton value="Create Action" action="#{action.createNewActions}" ajax="true" />
 </h:form>
+
 
         <h:form>
             <p:dataTable value="#{action.allActions}" var="action">

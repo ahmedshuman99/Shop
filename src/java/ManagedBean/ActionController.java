@@ -116,11 +116,19 @@ public class ActionController implements  Serializable {
     }
     
    public void createNewActions() {
-    action.setIdClient(new Client(idClientMode));
+    // Set the name of the product to the action
     action.setIdProduct(new Product(idProductMode));
+    action.setIdClient(new Client(idClientMode));
+    
+    // Set any other properties of the action if needed
+    
+    // Create the action using the service
     service.create(action);
+    
+    // Update the actions list
     actions = service.getAll();
 }
+
 
     public ActionController() {
     }
