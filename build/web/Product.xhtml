@@ -15,6 +15,7 @@
         <h:outputLabel for="productPrice" value="Price:" />
         <h:inputText id="productPrice" value="#{product.price}" />
         <p:commandButton value="Create" action="#{product.createNewProduct}" update=":table"/>
+        <p:button value="Order" outcome="ProductSearsh.xhtml"/>
     </h:panelGrid>
 </h:form>
 

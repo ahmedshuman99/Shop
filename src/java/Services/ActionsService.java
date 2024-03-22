@@ -6,13 +6,16 @@
 package Services;
 
 import Entities.Action;
+import Entities.Client;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -49,6 +52,19 @@ public class ActionsService {
         }
     }
 
+      public List<Client> getClientsByProductId(int productId) {
+        TypedQuery<Action> query = em.createQuery(
+                "SELECT a FROM Action a WHERE a.idProduct.id = :productId", Action.class);
+        query.setParameter("productId", productId);
+        List<Action> actions = query.getResultList();
+
+        List<Client> clients = actions.stream()
+                .map(Action::getIdClient)
+                .distinct()  // Ensure unique clients
+                .collect(Collectors.toList());
+
+        return clients;
+    }
     
 
 }
